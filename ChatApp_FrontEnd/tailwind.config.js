@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [],
+  content: [
+    "./src/App.tsx",
+    "./src/components/SignUp.tsx",
+    "./src/components/SignIn.tsx",
+  ],
   theme: {
     extend: {},
   },
