@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "dev": "bun run --hot src/index.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.30.10",
+    "hono": "^4.3.7",
+    "postgres": "^3.4.4"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.21.2",
+    "@types/bun": "latest"
+  }
+}
