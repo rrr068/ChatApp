@@ -21,8 +21,8 @@ CREATE TABLE "user"
 (
   id          SERIAL        PRIMARY KEY,
   name        TEXT          NOT NULL UNIQUE,
-  password    VARCHAR(64)   NOT NULL,
-  salt        VARCHAR(64)   NOT NULL,
+  password    VARCHAR(128)   NOT NULL,
+  salt        VARCHAR(32)   NOT NULL,
   created_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

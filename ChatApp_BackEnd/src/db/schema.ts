@@ -8,8 +8,8 @@ export const User = pgTable (
   {
     id : serial('id').primaryKey(),
     name : text('name').notNull().unique(),
-    password: varchar('password', {length: 64}).notNull(),
-    salt: varchar('salt', {length: 64}).notNull(),
+    password: varchar('password', {length: 72}).notNull(),
+    salt: varchar('salt', {length: 32}).notNull(),
     created_at: timestamp('created_at').notNull(),
     updated_at: timestamp('updated_at').notNull()
   }
