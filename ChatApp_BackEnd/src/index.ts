@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
-import { selectAllUsers } from './db/select'
+import { insertUser, selectAllUsers } from './db/user'
+import { User } from './db/schema';
 
 const app = new Hono()
 
@@ -20,6 +21,21 @@ app.get('/user', async (c) => {
     }
   } catch (e) {
     return c.text('Error')
+  }
+})
+
+app.post('/user', async (c) => {
+  const params = await c.req.json<typeof User.$inferInsert>()
+  const name = params.name
+  const password = params.password
+  if (!name || !password) {
+    return c.text('Invalid params')
+  }
+  try {
+    await insertUser(name, password)
+    return c.text('Success')
+  } catch (e) {
+    return c.text(`Error: ${e}`)
   }
 })
 
