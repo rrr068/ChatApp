@@ -18,3 +18,11 @@ export const hashPassword = async (pw: string): Promise<{salt: string, hashedPas
   const hashedPassword = await password.hash(`${pw}${salt}`);
   return { hashedPassword, salt };
 };
+
+export const verifyPassword = async (pw: string, salt: string, hashedPassword: string): Promise<boolean> => {
+  // passwordが正しいか確認する関数
+  console.log('pw:', pw);
+  console.log('salt:', salt);
+  console.log('hashedPassword:', hashedPassword);
+  return await password.verify(`${pw}${salt}`, hashedPassword);
+};
