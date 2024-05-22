@@ -1,21 +1,31 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const userParams = {
+      name: name,
+      password: password
+    }
 
     try {
-      const res = await axios.post('http://localhost:3030', {
-        name: name,
-        password: password
-      });
-    } catch (error) {
-      console.log(error);
+      const res = await axios.post('http://localhost:3000/signup', userParams);
+      if (res.data) {
+        localStorage.setItem('name', name);
+        localStorage.setItem('password', password);
+        navigate('/');
+      }
+    } catch (err: any) {
+      console.log(err.message);
+      return;
     }
+
   };
 
   return (
