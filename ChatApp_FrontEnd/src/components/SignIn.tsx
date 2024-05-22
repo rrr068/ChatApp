@@ -1,5 +1,31 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const SignIn = () => {
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      localStorage.setItem('name', name);
+      localStorage.setItem('password', password);
+
+      const res = await axios.post('http://localhost:3000/signin', {
+        name: name,
+        password: password,
+      });
+      console.log(res.data);
+
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+  };
 
   return (
      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -26,6 +52,8 @@ const SignIn = () => {
                   type="name"
                   autoComplete="name"
                   required
+                  value={name}
+                  onClick={(e) => setName(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -49,6 +77,8 @@ const SignIn = () => {
                   type="password"
                   autoComplete="current-password"
                   required
+                  value={password}
+                  onClick={(e) => setPassword(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -58,6 +88,7 @@ const SignIn = () => {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onSubmit={handleSubmit}
               >
                 サインイン
               </button>
