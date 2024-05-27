@@ -6,6 +6,9 @@ services:
       dockerfile: Dockerfile.Hono
     ports:
       - 3000:3000
+    tty: true
+    volumes:
+      - ./src:/usr/app/src
     networks:
       - app-network
   postgresql:

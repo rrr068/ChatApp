@@ -1,4 +1,4 @@
-import { db, User, Space, Message, joinSpaceUser } from './schema'
+import { db, User } from './schema'
 import { eq } from 'drizzle-orm'
 import { hashPassword, verifyPassword } from '../util/password'
 import { password } from 'bun'
